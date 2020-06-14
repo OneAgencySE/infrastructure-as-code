@@ -1,0 +1,1 @@
+New-AzResourceGroupDeployment -ResourceGroupName "oa-infra-dev" -TemplateFile ".\environment.json"
