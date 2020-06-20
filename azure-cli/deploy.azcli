@@ -1,0 +1,7 @@
+az login
+
+az account set --subscription "4ded1a6f-aef9-4141-a03b-5d74d2bb8519"
+
+az group create --name "oa-infra-dev" --location "west europe"
+
+az acr create --name "oainfraacrdev" --sku "Basic" --resource-group "oa-infra-dev" --admin-enabled false --location "west europe"
