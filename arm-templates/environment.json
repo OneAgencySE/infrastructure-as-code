@@ -4,7 +4,6 @@
     "parameters": {
         "acrName": {
             "type": "string",
-            "defaultValue": "[concat('acr', uniqueString(resourceGroup().id))]",
             "minLength": 5,
             "maxLength": 50,
             "metadata": {
@@ -20,7 +19,6 @@
         },
         "location": {
             "type": "string",
-            "defaultValue": "[resourceGroup().location]",
             "metadata": {
                 "description": "Location for registry home replica."
             }
@@ -30,16 +28,11 @@
             "metadata": {
                 "description": "Tier of your Azure Container Registry. Geo-replication requires Premium SKU."
             },
-            "defaultValue": "Premium",
             "allowedValues": [
+                "Basic",
+                "Standard",
                 "Premium"
             ]
-        },
-        "acrReplicaLocation": {
-            "type": "string",
-            "metadata": {
-                "description": "Short name for registry replica location."
-            }
         }
     },
     "resources": [
@@ -60,22 +53,6 @@
             "properties": {
                 "adminUserEnabled": "[parameters('acrAdminUserEnabled')]"
             }
-        },
-        {
-            "name": "[concat(parameters('acrName'), '/', parameters('acrReplicaLocation'))]",
-            "type": "Microsoft.ContainerRegistry/registries/replications",
-            "apiVersion": "2019-05-01",
-            "location": "[parameters('acrReplicaLocation')]",
-            "properties": {},
-            "dependsOn": [
-                "[concat('Microsoft.ContainerRegistry/registries/', parameters('acrName'))]"
-            ]
         }
-    ],
-    "outputs": {
-      "acrLoginServer": {
-      "value": "[reference(resourceId('Microsoft.ContainerRegistry/registries',parameters('acrName')),'2019-05-01').loginServer]",
-      "type": "string"
-      }
-    }
+    ]
 }
