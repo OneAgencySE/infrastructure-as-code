@@ -1,26 +1,21 @@
 using Pulumi;
 using Pulumi.Azure.Core;
-using Pulumi.Azure.Storage;
+using Pulumi.Azure.ContainerService;
 
 class MyStack : Stack
 {
     public MyStack()
     {
         // Create an Azure Resource Group
-        var resourceGroup = new ResourceGroup("resourceGroup");
+        var rg = new ResourceGroup("oa-infra-dev");
 
-        // Create an Azure Storage Account
-        var storageAccount = new Account("storage", new AccountArgs
+        // Create an Azure Container Registry
+        var acr = new Registry("oainfraacrdev", new RegistryArgs
         {
-            ResourceGroupName = resourceGroup.Name,
-            AccountReplicationType = "LRS",
-            AccountTier = "Standard"
+            ResourceGroupName = rg.Name,
+            Location = rg.Location,
+            Sku = "Basic",
+            AdminEnabled = false,
         });
-
-        // Export the connection string for the storage account
-        this.ConnectionString = storageAccount.PrimaryConnectionString;
     }
-
-    [Output]
-    public Output<string> ConnectionString { get; set; }
 }
