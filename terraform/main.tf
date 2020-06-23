@@ -1,3 +1,9 @@
+terraform {
+  backend "local" {
+    path = "terraform/terraform.tfstate"
+  }
+}
+
 provider "azurerm" {
   version = "=2.0.0"
   features {}
