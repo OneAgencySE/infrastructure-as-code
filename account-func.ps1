@@ -16,7 +16,7 @@ function SetupDeployAccount {
         $objectId = az ad sp list --display-name $AccountName --query [].objectId --output tsv
         
         # Give service principal contributor access on the chosen subscription
-        az role assignment create --role "b24988ac-6180-42a0-ab88-20f7382dd24c" --assignee-object-id $objectId --scope "/subscriptions/$Subscription" --assignee-principal-type "ServicePrincipal"
+        az role assignment create --role "b24988ac-6180-42a0-ab88-20f7382dd24c" --assignee-object-id $objectId --scope "/subscriptions/$Subscription" --assignee-principal-type "ServicePrincipal" | Out-Null 
     }
     end
     {
