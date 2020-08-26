@@ -1,6 +1,8 @@
 terraform {
-  backend "local" {
-    path = "terraform/terraform.tfstate"
+  backend "remote" {
+    workspaces {
+      name = "infrastructure-as-code"
+    }
   }
 }
 
