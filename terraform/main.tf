@@ -13,7 +13,7 @@ provider "azurerm" {
 
 resource "azurerm_resource_group" "rg" {
   name     = "oa-infra-dev"
-  location = "North Europe"
+  location = "West Europe"
 }
 
 resource "azurerm_container_registry" "acr" {
