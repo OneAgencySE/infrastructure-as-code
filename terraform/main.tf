@@ -19,6 +19,9 @@ terraform {
   #  path = "terraform/terraform.tfstate"
   #}
   backend "remote" {
+    hostname     = "app.terraform.io"
+    organization = "oa-infrastructure-as-code"
+
     workspaces {
       name = "infrastructure-as-code"
     }
