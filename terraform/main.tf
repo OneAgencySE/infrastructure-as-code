@@ -15,8 +15,12 @@ variable "client_secret" {
 }
 
 terraform {
-  backend "local" {
-    path = "terraform/terraform.tfstate"
+  #backend "local" {
+  #  path = "terraform/terraform.tfstate"
+  #}
+  backend "remote" {
+      workspaces {
+      name = "infrastructure-as-code"
   }
 }
 
@@ -43,4 +47,3 @@ resource "azurerm_container_registry" "acr" {
   sku                 = "Basic"
   admin_enabled       = false
 }
-
