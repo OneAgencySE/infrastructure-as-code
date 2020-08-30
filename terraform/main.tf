@@ -19,8 +19,9 @@ terraform {
   #  path = "terraform/terraform.tfstate"
   #}
   backend "remote" {
-      workspaces {
+    workspaces {
       name = "infrastructure-as-code"
+    }
   }
 }
 
