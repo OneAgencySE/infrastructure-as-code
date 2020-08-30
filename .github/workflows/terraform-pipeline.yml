@@ -36,10 +36,10 @@ jobs:
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      run: terraform plan -var subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }} -var tenant_id=${{ secrets.AZURE_TENANT_ID }} -var client_id=${{ secrets.SP_CLIENT_ID }} -var client_secret=${{ secrets.SP_CLIENT_SECRET }} -lock=false -out=out.tfplan
+      run: terraform plan -var subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }} -var tenant_id=${{ secrets.AZURE_TENANT_ID }} -var client_id=${{ secrets.SP_CLIENT_ID }} -var client_secret=${{ secrets.SP_CLIENT_SECRET }} -out=out.tfplan
     
       # On push to master, build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
       if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-      run: terraform apply -lock=false out.tfplan 
+      run: terraform apply out.tfplan 
